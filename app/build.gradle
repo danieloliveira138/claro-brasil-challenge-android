@@ -15,11 +15,21 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
+        debug {
+            buildConfigField("String", "TOKEN_ID", "\"2018b10d862dac36e1925c420efad62d\"")
+            buildConfigField("String", "BaseUrl", "\"https://api.themoviedb.org/3/\"")
+            resValue "bool", "debug", "true"
+        }
         release {
+            buildConfigField("String", "TOKEN_ID", "\"2018b10d862dac36e1925c420efad62d\"")
+            buildConfigField("String", "BaseUrl", "\"https://api.themoviedb.org/3/\"")
+            resValue "bool", "debug", "false"
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+
     }
 }
 
@@ -34,15 +44,12 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     // Gson retrofit converter
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
-    // Rx Retrofit adapter
-    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.6.2'
+    // Coroutines Retrofit adapter
+    implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'
     // Okhttp adapter
     implementation 'com.squareup.okhttp3:logging-interceptor:4.2.2'
     // OkHttp
     implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
-    // Rx
-    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
-    implementation 'io.reactivex.rxjava2:rxjava:2.2.0'
     // Koin
     implementation "org.koin:koin-core:$koin_version"
     implementation "org.koin:koin-android-viewmodel:$koin_version"
@@ -73,4 +80,6 @@ dependencies {
     androidTestImplementation('androidx.test.espresso:espresso-core:3.2.0') {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
+    implementation 'androidx.room:room-runtime:2.2.1'
+    annotationProcessor 'androidx.room:room-compiler:2.2.1'
 }
