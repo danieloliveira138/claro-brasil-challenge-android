@@ -4,6 +4,7 @@ import com.danieloliveira.clarochallenge.models.MovieDetail
 import com.danieloliveira.clarochallenge.models.MovieList
 
 interface Repository {
+
     suspend fun requestMovies(typeSearch: String,
                               api_key: String,
                               language: String,
@@ -19,6 +20,5 @@ interface Repository {
                             adultContent: Boolean,
                             query: String,
                             page: Int): MovieList
-
 
 }
