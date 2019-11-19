@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">#000000</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#daa512</color>
+    <color name="black_transparent_40">#CC000000</color>
+    <color name="black_transparent_60">#90000000</color>
+    <color name="black_transparent_20">#33000000</color>
+    <color name="black_transparent_10">#1A000000</color>
+
+    <color name="searchBarPrimaryColor">#99000000</color>
+    <color name="searchBarPrimaryDarkColor">#99000000</color>
+    <color name="searchBarIconColor">#fff</color>
+
+    <color name="darkGray">#808080</color>
+    <color name="white">#ffffff</color>
+    <color name="searchBarTextColor">#ffffff</color>
+    <color name="searchBarHintColor">#daa512</color>
+    <color name="searchBarPlaceholderColor">#CCffffff</color>
+    <color name="searchBarTextHighlightColor">#8000a1ff</color>
 </resources>
