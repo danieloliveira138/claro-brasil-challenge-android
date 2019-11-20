@@ -23,7 +23,9 @@ import com.miguelcatalan.materialsearchview.MaterialSearchView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.material_searh_bar.*
 import kotlinx.android.synthetic.main.navigation_view.*
+import org.jetbrains.anko.alert
 import org.jetbrains.anko.toast
+import org.jetbrains.anko.yesButton
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -99,11 +101,18 @@ class MainActivity : AppCompatActivity(), RadioGroup.OnCheckedChangeListener,
                 movieAdapter.addMovieList(it)
                 model.page = it.page?.plus(1)
                 progressBar.visibility = View.GONE
-                return@Observer
             }
 
-            toast("Error -> Null Object")
+            if(it == null || it.results.isNullOrEmpty()) {
+                genericErrorMessage()
+            }
         })
+    }
+
+    private fun genericErrorMessage() {
+        alert ("Nenhum filme foi encontrado a partir desta pesquisa!") {
+            yesButton {  }
+        }.show()
     }
 
     private fun setupRecycler() {

@@ -25,7 +25,9 @@ import com.danieloliveira.clarochallenge.utils.toMovie
 import com.danieloliveira.clarochallenge.viewmodel.DetailViewModel
 import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.material_searh_bar.*
+import org.jetbrains.anko.alert
 import org.jetbrains.anko.design.snackbar
+import org.jetbrains.anko.yesButton
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class DetailActivity : AppCompatActivity() {
@@ -40,6 +42,7 @@ class DetailActivity : AppCompatActivity() {
         setupUiComponents()
 
         setupObservers()
+
     }
 
     private fun setupObservers() {
@@ -71,7 +74,16 @@ class DetailActivity : AppCompatActivity() {
             model.loadMovie(intent.getIntExtra(StringContants.MOVIE_ID.const, -1))
             model.loadVideos(intent.getIntExtra(StringContants.MOVIE_ID.const, -1))
             progressBar.visibility = View.VISIBLE
+        } else {
+            genericErrorMessage()
         }
+    }
+
+    private fun genericErrorMessage() {
+        alert ("Ops, algum erro aconteceu e não foi possível " +
+                "carregar os detalhes deste filme, Volte para tela principal") {
+            yesButton { this@DetailActivity.finish() }
+        }.show()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -117,7 +129,7 @@ class DetailActivity : AppCompatActivity() {
         classification.text = model.getClassification(movieDetail.adult)
         votes.text = model.getVotes(movieDetail.vote_count)
         var options = RequestOptions()
-        options = options.transform(CenterCrop(), RoundedCorners(16))
+        options = options.transform(CenterCrop())
 
         Glide.with(this)
             .load(PosterImages.W500.getImageUrl(movieDetail.backdrop_path))

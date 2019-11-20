@@ -26,7 +26,7 @@ class MovieHolder(val view: View): RecyclerView.ViewHolder(view) {
             )
 
         var options = RequestOptions()
-        options = options.transform(CenterCrop(), RoundedCorners(16))
+        options = options.transform(CenterCrop())
 
         Glide.with(view.context)
             .load(PosterImages.W200.getImageUrl(movie.poster_path))

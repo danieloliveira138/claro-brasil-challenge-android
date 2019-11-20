@@ -9,6 +9,7 @@ import at.huber.youtubeExtractor.YouTubeExtractor
 import at.huber.youtubeExtractor.YtFile
 import com.danieloliveira.clarochallenge.exoplayer.ExoPlayerManager
 import android.net.Uri
+import android.view.View
 import com.danieloliveira.clarochallenge.R.*
 import com.danieloliveira.clarochallenge.callbacks.CallBacks
 import com.danieloliveira.clarochallenge.enums.StringContants
@@ -28,6 +29,7 @@ class VideoActivity : AppCompatActivity(), CallBacks.playerCallBack {
         if(intent.hasExtra(StringContants.MOVIE_VIDEO_ID.const)){
             mYoutubeLink = "$youtubeBaseUrl/watch?v=${intent.getStringExtra(StringContants.MOVIE_VIDEO_ID.const)}"
             extractYoutubeUrl()
+            progressBar.visibility = View.VISIBLE
         } else {
             toast("Impossível reproduzir este video no momento.")
             onBackPressed()
@@ -55,8 +57,8 @@ class VideoActivity : AppCompatActivity(), CallBacks.playerCallBack {
                             if (downloadUrl != null && downloadUrl.isNotEmpty()) {
 
                                 val youtubeUri = Uri.parse(downloadUrl)
-
                                 playVideo(youtubeUri.toString())
+                                progressBar.visibility = View.GONE
                                 return
                             }
                         }
