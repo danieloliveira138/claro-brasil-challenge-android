@@ -70,6 +70,7 @@ class MainActivityViewModel(private val repository: Repository): BaseViewModel()
         flagFavorite = true
         searchQuery = null
         var savedMovies: List<Movie>? = null
+
         scope.launch {
              savedMovies = repository.getFavoriteMovies()
             if(savedMovies == null) {
