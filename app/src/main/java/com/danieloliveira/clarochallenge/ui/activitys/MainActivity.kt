@@ -130,17 +130,24 @@ class MainActivity : AppCompatActivity(), RadioGroup.OnCheckedChangeListener,
         return true
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.favoriteList -> {
+                requestFavoriteMovies()
+            }
+        }
+        return true
+    }
+
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START)
             return
         }
-
-        if (searchView.isSearchOpen()) {
+        if (searchView.isSearchOpen) {
             searchView.closeSearch()
             return
         }
-
         super.onBackPressed()
     }
 
@@ -211,5 +218,11 @@ class MainActivity : AppCompatActivity(), RadioGroup.OnCheckedChangeListener,
         compoundButton?.let {
             model.enableAdultContent(it.isChecked)
         }
+    }
+
+    private fun requestFavoriteMovies() {
+        movieAdapter.clearMovieList()
+        progressBar.visibility = View.VISIBLE
+        model.requestFavoriteMovies()
     }
 }

@@ -1,7 +1,10 @@
 package com.danieloliveira.clarochallenge.viewmodel
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import com.danieloliveira.clarochallenge.enums.StringContants
+import com.danieloliveira.clarochallenge.models.Movie
+import com.danieloliveira.clarochallenge.models.MovieDetail
 import com.danieloliveira.clarochallenge.models.MovieList
 import com.danieloliveira.clarochallenge.source.Repository
 import kotlinx.coroutines.*
@@ -9,7 +12,7 @@ import kotlinx.coroutines.*
 class MainActivityViewModel(private val repository: Repository): BaseViewModel() {
 
     val moviesData : MutableLiveData<MovieList?> = MutableLiveData()
-
+    var flagFavorite = false
     var page: Int? = null
     private var searchQuery: String? = null
 
@@ -17,25 +20,31 @@ class MainActivityViewModel(private val repository: Repository): BaseViewModel()
         when {
             typeSearch != null -> {
                 searchQuery = null
+                flagFavorite = false
+                searchQuery = null
                 page = 1
                 requestMovies(typeSearch)
                 return
             }
             query != null -> {
+                flagFavorite = false
                 page = 1
                 searchQuery = query
                 searchMovies(query)
                 return
             }
             searchQuery != null -> {
+                flagFavorite = false
                 searchMovies(searchQuery!!)
             }
             else -> {
+                if (flagFavorite) return
+
                 requestMovies(null)
+
             }
         }
-
-
+        
     }
 
     private fun requestMovies(typeSearch: StringContants?) {
@@ -55,6 +64,23 @@ class MainActivityViewModel(private val repository: Repository): BaseViewModel()
                 repository.searchMovie(query, page?: 1)
             )
         }
+    }
+
+    fun requestFavoriteMovies() {
+        flagFavorite = true
+        searchQuery = null
+        var savedMovies: List<Movie>? = null
+        scope.launch {
+             savedMovies = repository.getFavoriteMovies()
+            if(savedMovies == null) {
+                moviesData.postValue(null)
+                return@launch
+            }
+            moviesData.postValue(
+                MovieList(page = 1, results = savedMovies)
+            )
+        }
+
     }
 
     fun setTypeSearch(typeSearch: String) = repository.setTypeSearch(typeSearch = typeSearch)
