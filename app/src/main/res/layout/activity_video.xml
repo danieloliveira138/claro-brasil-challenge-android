@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+        android:id="@+id/videoView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black_transparent_100"
+        app:controller_layout_id="@layout/exo_playback_control_view"
+        app:player_layout_id="@layout/exo_simple_player_view"
+        app:repeat_toggle_modes="none"
+        app:show_timeout="45000"
+        app:rewind_increment="10000"
+        app:fastforward_increment="10000"
+        app:resize_mode="fixed_height"
+        app:surface_type="texture_view" />
+
+    <include
+        android:id="@+id/progressBar"
+        layout="@layout/progress_layout"
+        android:visibility="gone"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

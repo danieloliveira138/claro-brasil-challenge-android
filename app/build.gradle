@@ -62,6 +62,16 @@ dependencies {
     // KTX
     implementation "androidx.core:core-ktx:$ktx_version"
     implementation "androidx.fragment:fragment-ktx:$ktx_version"
+    // Exoplayer
+    implementation "com.google.android.exoplayer:exoplayer:$exoplayer_version"
+    implementation "com.google.android.exoplayer:exoplayer-core:$exoplayer_version"
+    implementation "com.google.android.exoplayer:exoplayer-dash:r2.X.X$exoplayer_version"
+    implementation "com.google.android.exoplayer:exoplayer-ui:$exoplayer_version"
+    implementation "com.google.android.exoplayer:exoplayer-smoothstreaming:$exoplayer_version"
+    implementation "com.google.android.exoplayer:exoplayer-hls:$exoplayer_version"
+
+    implementation 'com.github.evgenyneu:js-evaluator-for-android:5.0.0'
+    implementation 'com.github.HaarigerHarald:android-youtubeExtractor:master-SNAPSHOT'
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"

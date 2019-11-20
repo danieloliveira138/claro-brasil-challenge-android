@@ -2,6 +2,7 @@ package com.danieloliveira.clarochallenge.enums
 
 enum class StringContants(val const: String) {
     MOVIE_ID("movie_id"),
+    MOVIE_VIDEO_ID("video_id"),
     TOP_RATED("top_rated"),
     UPCOMING("upcoming"),
     POPULAR("popular"),

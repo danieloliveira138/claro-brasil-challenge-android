@@ -97,4 +97,5 @@
         <item>1943</item>
         <item>1942</item>
     </string-array>
+    <string name="title_activity_video">VideoActivity</string>
 </resources>
