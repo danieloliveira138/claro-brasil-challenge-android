@@ -9,10 +9,8 @@ Utilizei libs para aumentar a produtividade como Anko e KTX.
 
 A baixo esta a lista com as libs.
 
-<img src="https://github.com/danieloliveira138/claro-brasil-challenge-android/tree/master/images/images/device-2019-11-20-143836.png" width="200" height="400">
-<img src="https://github.com/danieloliveira138/claro-brasil-challenge-android/tree/master/images/images/device-2019-11-20-143901.png" width="200" height="400">
-<img src="https://github.com/danieloliveira138/claro-brasil-challenge-android/tree/master/imagesimages/device-2019-11-20-143918.png" width="200" height="400">
-<img src="https://github.com/danieloliveira138/claro-brasil-challenge-android/tree/master/images/images/device-2019-11-20-143937.png" width="200" height="400">
+<img src="https://github.com/danieloliveira138/claro-brasil-challenge-android/tree/master/images/images/device-2019-11-20-143836.png" width="200" height="395"/> <img src="https://github.com/danieloliveira138/claro-brasil-challenge-android/tree/master/images/images/device-2019-11-20-143901.png" width="200" height="395"/> <img src="https://github.com/danieloliveira138/claro-brasil-challenge-android/tree/master/imagesimages/device-2019-11-20-143918.png" width="200" height="395" />
+<img src="https://github.com/danieloliveira138/claro-brasil-challenge-android/tree/master/images/images/device-2019-11-20-143937.png" width="200" height="395" />
 
 ----------------------------
 
