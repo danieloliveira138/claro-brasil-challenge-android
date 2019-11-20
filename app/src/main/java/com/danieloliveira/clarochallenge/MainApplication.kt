@@ -1,6 +1,7 @@
 package com.danieloliveira.clarochallenge
 
 import android.app.Application
+import android.content.Context
 import com.danieloliveira.clarochallenge.di.appModule
 import com.danieloliveira.clarochallenge.di.viewModelModule
 import net.danlew.android.joda.JodaTimeAndroid
@@ -21,4 +22,5 @@ class MainApplication: Application() {
             modules(listOf(appModule, viewModelModule))
         }
     }
+
 }

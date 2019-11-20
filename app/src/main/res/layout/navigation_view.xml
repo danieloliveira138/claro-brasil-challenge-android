@@ -63,12 +63,6 @@
                 android:text="@string/lancamentos"
                 android:textColor="@color/white" />
 
-            <RadioButton
-                android:id="@+id/nowPlaying"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/em_cartaz"
-                android:textColor="@color/white" />
         </RadioGroup>
 
         <LinearLayout
@@ -98,6 +92,7 @@
                 android:id="@+id/labelLanguage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:text="@string/idioma" />
 
             <Spinner
