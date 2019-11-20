@@ -11,20 +11,27 @@ import com.danieloliveira.clarochallenge.exoplayer.ExoPlayerManager
 import android.net.Uri
 import com.danieloliveira.clarochallenge.R.*
 import com.danieloliveira.clarochallenge.callbacks.CallBacks
+import com.danieloliveira.clarochallenge.enums.StringContants
 import kotlinx.android.synthetic.main.activity_video.*
+import org.jetbrains.anko.toast
 
 
 class VideoActivity : AppCompatActivity(), CallBacks.playerCallBack {
 
-    private val YOUTUBE_VIDEO_ID = "uZnWUZW1hQo"
-    private val BASE_URL = "https://www.youtube.com"
-    private val mYoutubeLink = "$BASE_URL/watch?v=$YOUTUBE_VIDEO_ID"
+    private val youtubeBaseUrl = "https://www.youtube.com"
+    private var mYoutubeLink : String? = null //=
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(layout.activity_video)
 
-        extractYoutubeUrl()
+        if(intent.hasExtra(StringContants.MOVIE_VIDEO_ID.const)){
+            mYoutubeLink = "$youtubeBaseUrl/watch?v=${intent.getStringExtra(StringContants.MOVIE_VIDEO_ID.const)}"
+            extractYoutubeUrl()
+        } else {
+            toast("Impossível reproduzir este video no momento.")
+            onBackPressed()
+        }
 
     }
 
@@ -72,5 +79,11 @@ class VideoActivity : AppCompatActivity(), CallBacks.playerCallBack {
     }
 
     override fun onItemClickOnItem(albumId: Int?) {}
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        ExoPlayerManager.getSharedInstance(this@VideoActivity).destroyPlayer()
+        finish()
+    }
 
 }
