@@ -98,5 +98,9 @@ dependencies {
     testImplementation "org.koin:koin-test:$koin_version"
     androidTestImplementation('androidx.test.espresso:espresso-core:3.2.0') {
         exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude module: 'recyclerview-v7'
+        exclude group: 'recyclerview-v7'
+        exclude group: 'com.google.guava:guava:19.0'
     }
 }
