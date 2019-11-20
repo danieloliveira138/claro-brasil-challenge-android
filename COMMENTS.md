@@ -9,11 +9,11 @@ Utilizei libs para aumentar a produtividade como Anko e KTX.
 
 A baixo esta a lista com as libs.
 
-
-----------
+|![image.1](https://github.com/danieloliveira138/claro-brasil-challenge-android/tree/master/images/device-2019-11-20-143836.png)|![image.2](https://github.com/danieloliveira138/claro-brasil-challenge-android/tree/master/images/device-2019-11-20-143901.png)|![image.3](https://github.com/danieloliveira138/claro-brasil-challenge-android/tree/master/images/device-2019-11-20-143918.png)|![image.4](https://github.com/danieloliveira138/claro-brasil-challenge-android/tree/master/images/device-2019-11-20-143937.png)
+----------------------------
 
 Libraries
--------------
+----------------------------
 
 - **Glide -> Download e exibição de imagens
 - **Retrofit -> Chamadas a Api
