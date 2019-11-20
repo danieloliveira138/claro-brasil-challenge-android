@@ -18,11 +18,15 @@ android {
 
     buildTypes {
         debug {
+            buildConfigField("String", "MOVIE_DATABASE", "\"DEBUG_MOVIE_DATABASE\"")
+            buildConfigField("String", "MOVIE_TABLE", "\"DEBUG_MOVIES\"")
             buildConfigField("String", "TOKEN_ID", "\"2018b10d862dac36e1925c420efad62d\"")
             buildConfigField("String", "BaseUrl", "\"https://api.themoviedb.org/3/\"")
             resValue "bool", "debug", "true"
         }
         release {
+            buildConfigField("String", "MOVIE_DATABASE", "\"MOVIE_DATABASE\"")
+            buildConfigField("String", "MOVIE_TABLE", "\"MOVIES\"")
             buildConfigField("String", "TOKEN_ID", "\"2018b10d862dac36e1925c420efad62d\"")
             buildConfigField("String", "BaseUrl", "\"https://api.themoviedb.org/3/\"")
             resValue "bool", "debug", "false"

@@ -2,8 +2,9 @@ package com.danieloliveira.clarochallenge.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.danieloliveira.clarochallenge.BuildConfig
 
-@Entity(tableName = "MOVIES")
+@Entity(tableName = BuildConfig.MOVIE_TABLE)
 data class Movie(
     var adult: Boolean? = null,
     var backdrop_path: String? = null,

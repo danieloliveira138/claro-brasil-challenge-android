@@ -1,8 +1,11 @@
 package com.danieloliveira.clarochallenge.di
 
 import androidx.recyclerview.widget.GridLayoutManager
+import com.danieloliveira.clarochallenge.MainApplication
 import com.danieloliveira.clarochallenge.source.Repository
 import com.danieloliveira.clarochallenge.source.RepositoryImpl
+import com.danieloliveira.clarochallenge.source.local.MovieDao
+import com.danieloliveira.clarochallenge.source.local.MovieDataBase
 import com.danieloliveira.clarochallenge.source.prefs.SharedPrefs
 import com.danieloliveira.clarochallenge.source.remote.RetrofitConfig
 import com.danieloliveira.clarochallenge.ui.adapters.MovieListAdapter
@@ -14,11 +17,13 @@ import org.koin.dsl.module
 
 val appModule: Module = module {
 
-    single<Repository> { RepositoryImpl(get(), get()) }
+    single<Repository> { RepositoryImpl(get(), get(), get()) }
 
     single { RetrofitConfig().service() }
 
     single { SharedPrefs(get()) }
+
+    single { MainApplication.database?.movieDao() }
 
     factory { GridLayoutManager( get(), 2) }
 
