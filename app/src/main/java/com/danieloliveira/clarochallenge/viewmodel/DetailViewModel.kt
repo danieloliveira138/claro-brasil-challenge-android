@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import com.danieloliveira.clarochallenge.enums.TextStyleSpannable
 import com.danieloliveira.clarochallenge.models.Genre
 import com.danieloliveira.clarochallenge.models.MovieDetail
+import com.danieloliveira.clarochallenge.models.Video
+import com.danieloliveira.clarochallenge.models.VideoResponse
 import com.danieloliveira.clarochallenge.source.Repository
 import com.danieloliveira.clarochallenge.utils.TextCustomUtils
 import kotlinx.coroutines.launch
@@ -12,11 +14,20 @@ import kotlinx.coroutines.launch
 class DetailViewModel(private val repository: Repository): BaseViewModel() {
 
     val detailMovie: MutableLiveData<MovieDetail> = MutableLiveData()
+    val movieVideos: MutableLiveData<VideoResponse> = MutableLiveData()
 
-    fun fetchData(id: Int) {
+    fun loadMovie(id: Int) {
         scope.launch {
             detailMovie.postValue(
                 repository.requestMovie(id)
+            )
+        }
+    }
+
+    fun loadVideos(id: Int) {
+        scope.launch {
+            movieVideos.postValue(
+                repository.requestVideos(id)
             )
         }
     }

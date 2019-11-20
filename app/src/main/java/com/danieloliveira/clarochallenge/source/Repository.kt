@@ -3,6 +3,7 @@ package com.danieloliveira.clarochallenge.source
 import com.danieloliveira.clarochallenge.enums.Languages
 import com.danieloliveira.clarochallenge.models.MovieDetail
 import com.danieloliveira.clarochallenge.models.MovieList
+import com.danieloliveira.clarochallenge.models.VideoResponse
 
 interface Repository {
 
@@ -10,8 +11,9 @@ interface Repository {
 
     suspend fun requestMovie(id: Int): MovieDetail?
 
-    suspend fun searchMovie(query: String,
-                            page: Int): MovieList?
+    suspend fun searchMovie(query: String, page: Int): MovieList?
+
+    suspend fun requestVideos(id: Int): VideoResponse?
 
     fun saveLanguage(languages: Languages)
 

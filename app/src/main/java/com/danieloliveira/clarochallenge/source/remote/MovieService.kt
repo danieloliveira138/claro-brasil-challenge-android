@@ -1,10 +1,7 @@
 package com.danieloliveira.clarochallenge.source.remote
 
 import com.danieloliveira.clarochallenge.BuildConfig
-import com.danieloliveira.clarochallenge.models.Country
-import com.danieloliveira.clarochallenge.models.Language
-import com.danieloliveira.clarochallenge.models.MovieDetail
-import com.danieloliveira.clarochallenge.models.MovieList
+import com.danieloliveira.clarochallenge.models.*
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -32,6 +29,12 @@ interface MovieService {
         @Query("include_adult") adultContent: Boolean,
         @Query("query") query: String,
         @Query("page") page: Int = 1): MovieList?
+
+    @GET("movie/{id}/videos")
+    suspend fun getVideos(
+        @Path("id") id: Int,
+        @Query("api_key") api_key: String = BuildConfig.TOKEN_ID,
+        @Query("language") language: String = "pt-BR"): VideoResponse?
 
     @GET("configuration/languages")
     suspend fun getLanguages(@Query("api_key") api_key: String): ArrayList<Language>?

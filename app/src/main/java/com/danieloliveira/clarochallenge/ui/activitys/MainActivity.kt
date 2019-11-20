@@ -133,8 +133,15 @@ class MainActivity : AppCompatActivity(), RadioGroup.OnCheckedChangeListener,
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START)
-        } else
-            super.onBackPressed()
+            return
+        }
+
+        if (searchView.isSearchOpen()) {
+            searchView.closeSearch()
+            return
+        }
+
+        super.onBackPressed()
     }
 
     override fun onCheckedChanged(radioGroup: RadioGroup?, radioButton: Int) {

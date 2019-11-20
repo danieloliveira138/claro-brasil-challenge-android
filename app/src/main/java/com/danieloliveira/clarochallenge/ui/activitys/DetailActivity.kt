@@ -37,6 +37,12 @@ class DetailActivity : AppCompatActivity() {
                 insertMovie(it)
             }
         })
+
+        model.movieVideos.observe(this, Observer {
+            it?.let {
+
+            }
+        })
     }
 
     private fun setupUiComponents() {
@@ -45,7 +51,8 @@ class DetailActivity : AppCompatActivity() {
 
         val intent = intent
         if (intent.hasExtra(StringContants.MOVIE_ID.const)){
-            model.fetchData(intent.getIntExtra(StringContants.MOVIE_ID.const, -1))
+            model.loadMovie(intent.getIntExtra(StringContants.MOVIE_ID.const, -1))
+            model.loadVideos(intent.getIntExtra(StringContants.MOVIE_ID.const, -1))
             progressBar.visibility = View.VISIBLE
         }
     }

@@ -4,6 +4,8 @@ import com.danieloliveira.clarochallenge.BuildConfig
 import com.danieloliveira.clarochallenge.enums.Languages
 import com.danieloliveira.clarochallenge.models.MovieDetail
 import com.danieloliveira.clarochallenge.models.MovieList
+import com.danieloliveira.clarochallenge.models.Video
+import com.danieloliveira.clarochallenge.models.VideoResponse
 import com.danieloliveira.clarochallenge.source.prefs.SharedPrefs
 import com.danieloliveira.clarochallenge.source.remote.MovieService
 
@@ -31,6 +33,8 @@ class RepositoryImpl(private val service: MovieService,
                 adultContent = getAdultContentOption(),
                 query = query,
                 page = page)
+
+    override suspend fun requestVideos(id: Int): VideoResponse? = service.getVideos(id = id)
 
     override fun saveLanguage(languages: Languages) = sharedPrefs.setLanguage(languages)
 
