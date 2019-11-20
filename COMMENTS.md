@@ -9,7 +9,7 @@ Utilizei libs para aumentar a produtividade como Anko e KTX.
 
 A baixo esta a lista com as libs.
 
-|![][image.1](images/device-2019-11-20-143836.png | width=100)|![][image.2](images/device-2019-11-20-143901.png | width=100)|![][image.3](images/device-2019-11-20-143918.png | width=100)|![][image.4](images/device-2019-11-20-143937.png | width=100)
+![][image.1](images/device-2019-11-20-143836.png){:width=200px} ![][image.2](images/device-2019-11-20-143901.png){:width=200px} ![][image.3](images/device-2019-11-20-143918.png){:width=200px} ![][image.4](images/device-2019-11-20-143937.png){:width=200px}
 ----------------------------
 
 Libraries
