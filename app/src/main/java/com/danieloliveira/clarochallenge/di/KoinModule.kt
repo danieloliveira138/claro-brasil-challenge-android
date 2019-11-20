@@ -1,10 +1,11 @@
 package com.danieloliveira.clarochallenge.di
 
 import androidx.recyclerview.widget.GridLayoutManager
-import com.danieloliveira.clarochallenge.MainApplication
+import androidx.room.Room
+import androidx.room.RoomDatabase
+import com.danieloliveira.clarochallenge.BuildConfig
 import com.danieloliveira.clarochallenge.source.Repository
 import com.danieloliveira.clarochallenge.source.RepositoryImpl
-import com.danieloliveira.clarochallenge.source.local.MovieDao
 import com.danieloliveira.clarochallenge.source.local.MovieDataBase
 import com.danieloliveira.clarochallenge.source.prefs.SharedPrefs
 import com.danieloliveira.clarochallenge.source.remote.RetrofitConfig
@@ -17,13 +18,16 @@ import org.koin.dsl.module
 
 val appModule: Module = module {
 
-    single<Repository> { RepositoryImpl(get(), get(), get()) }
-
     single { RetrofitConfig().service() }
 
     single { SharedPrefs(get()) }
 
-    single { MainApplication.database?.movieDao() }
+    single<MovieDataBase> { Room.databaseBuilder(
+        get(), MovieDataBase::class.java, BuildConfig.MOVIE_DATABASE).build() }
+
+    factory { get<MovieDataBase>().movieDao() }
+
+    single<Repository> { RepositoryImpl(get(), get(), get()) }
 
     factory { GridLayoutManager( get(), 2) }
 

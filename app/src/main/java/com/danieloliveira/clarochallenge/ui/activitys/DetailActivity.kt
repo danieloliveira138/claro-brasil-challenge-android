@@ -4,8 +4,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
@@ -18,13 +20,18 @@ import com.danieloliveira.clarochallenge.enums.StringContants
 import com.danieloliveira.clarochallenge.models.MovieDetail
 import com.danieloliveira.clarochallenge.models.Video
 import com.danieloliveira.clarochallenge.ui.views.VideoHolder
+import com.danieloliveira.clarochallenge.utils.logIt
+import com.danieloliveira.clarochallenge.utils.toMovie
 import com.danieloliveira.clarochallenge.viewmodel.DetailViewModel
 import kotlinx.android.synthetic.main.activity_detail.*
+import kotlinx.android.synthetic.main.material_searh_bar.*
+import org.jetbrains.anko.design.snackbar
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class DetailActivity : AppCompatActivity() {
 
     private val model: DetailViewModel by viewModel()
+    private var favoriteMenu: MenuItem? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +45,7 @@ class DetailActivity : AppCompatActivity() {
     private fun setupObservers() {
         model.detailMovie.observe(this, Observer {
             it?.let {
+                model.movie = it.toMovie()
                 insertMovie(it)
             }
         })
@@ -46,6 +54,11 @@ class DetailActivity : AppCompatActivity() {
             it?.let {
                 createVideosList(it.results)
             }
+        })
+
+        model.favoriteMovie.observe(this, Observer {
+            model.isFavorite = it != null
+            setFavoriteMovie(isFavorite = it != null)
         })
     }
 
@@ -61,11 +74,33 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_favorite, menu)
+        favoriteMenu = menu?.getItem(0)
+        return true
+    }
+
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item?.itemId){
             android.R.id.home -> onBackPressed()
+            R.id.favoriteMovie -> {
+                favoriteMenu = item
+                model.setFavoriteMovie()
+            }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun setFavoriteMovie(isFavorite: Boolean) =
+        favoriteMenu?.let {
+            it.icon = ContextCompat.getDrawable(
+                this,
+                if(isFavorite)
+                    R.drawable.ic_favorite_red_24dp
+                else
+                    R.drawable.ic_favorite_border_red_24dp)
+
+
     }
 
     override fun onBackPressed() {
@@ -75,19 +110,12 @@ class DetailActivity : AppCompatActivity() {
 
     private fun insertMovie(movieDetail: MovieDetail) {
         movieTitle.text = movieDetail.title
-
         movieGenre.text = model.getMovieGenres(movieDetail.genres)
-
         movieRelease.text = model.getReleaseDate(movieDetail.release_date)
-
         movieRealTitle.text = movieDetail.original_title
-
         overview.text = model.getOverview(movieDetail.overview)
-
         classification.text = model.getClassification(movieDetail.adult)
-
         votes.text = model.getVotes(movieDetail.vote_count)
-
         var options = RequestOptions()
         options = options.transform(CenterCrop(), RoundedCorners(16))
 
@@ -119,6 +147,7 @@ class DetailActivity : AppCompatActivity() {
 
         progressBar.visibility = View.GONE
 
+        model.getFavoriteMovie(movieDetail.id)
     }
 
     private fun sendToVideoActivity(movieKey: String) {

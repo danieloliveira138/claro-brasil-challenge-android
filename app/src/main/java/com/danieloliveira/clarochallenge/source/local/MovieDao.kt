@@ -10,7 +10,7 @@ interface MovieDao {
     suspend fun getMovie(id: Int): Movie
 
     @Query("SELECT * FROM ${BuildConfig.MOVIE_TABLE} ")
-    suspend fun getMovies(): List<Movie>?
+    suspend fun getMovies(): List<Movie>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMovie(movie: Movie)

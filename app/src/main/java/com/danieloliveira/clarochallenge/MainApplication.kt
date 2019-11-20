@@ -14,10 +14,6 @@ import org.koin.core.context.startKoin
 @Suppress("unused")
 class MainApplication: Application() {
 
-    companion object {
-        var database: MovieDataBase? = null
-    }
-
     override fun onCreate() {
         super.onCreate()
 
@@ -29,15 +25,6 @@ class MainApplication: Application() {
             modules(listOf(appModule, viewModelModule))
         }
 
-        database = Room.databaseBuilder(
-            this,
-            MovieDataBase::class.java,
-            BuildConfig.MOVIE_DATABASE).build()
-    }
-
-    override fun onTerminate() {
-        database?.close()
-        super.onTerminate()
     }
 
 }

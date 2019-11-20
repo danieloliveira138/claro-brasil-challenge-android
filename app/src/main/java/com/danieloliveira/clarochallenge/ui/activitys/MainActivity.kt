@@ -15,9 +15,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.danieloliveira.clarochallenge.R
 import com.danieloliveira.clarochallenge.enums.StringContants
-import com.danieloliveira.clarochallenge.enums.logIt
 import com.danieloliveira.clarochallenge.ui.adapters.MovieListAdapter
 import com.danieloliveira.clarochallenge.utils.hideKeyboard
+import com.danieloliveira.clarochallenge.utils.logIt
 import com.danieloliveira.clarochallenge.viewmodel.MainActivityViewModel
 import com.miguelcatalan.materialsearchview.MaterialSearchView
 import kotlinx.android.synthetic.main.activity_main.*

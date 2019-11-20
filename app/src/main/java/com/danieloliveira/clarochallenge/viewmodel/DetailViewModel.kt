@@ -4,8 +4,8 @@ import android.text.SpannableString
 import androidx.lifecycle.MutableLiveData
 import com.danieloliveira.clarochallenge.enums.TextStyleSpannable
 import com.danieloliveira.clarochallenge.models.Genre
+import com.danieloliveira.clarochallenge.models.Movie
 import com.danieloliveira.clarochallenge.models.MovieDetail
-import com.danieloliveira.clarochallenge.models.Video
 import com.danieloliveira.clarochallenge.models.VideoResponse
 import com.danieloliveira.clarochallenge.source.Repository
 import com.danieloliveira.clarochallenge.utils.TextCustomUtils
@@ -15,6 +15,9 @@ class DetailViewModel(private val repository: Repository): BaseViewModel() {
 
     val detailMovie: MutableLiveData<MovieDetail> = MutableLiveData()
     val movieVideos: MutableLiveData<VideoResponse> = MutableLiveData()
+    val favoriteMovie: MutableLiveData<Movie> = MutableLiveData()
+    var movie: Movie? = null
+    var isFavorite: Boolean = false
 
     fun loadMovie(id: Int) {
         scope.launch {
@@ -30,6 +33,36 @@ class DetailViewModel(private val repository: Repository): BaseViewModel() {
                 repository.requestVideos(id)
             )
         }
+    }
+
+    fun setFavoriteMovie() {
+        if (movie == null) return
+
+        if (isFavorite) {
+            scope.launch {
+                repository.deleteMovie(movie = movie!!)
+                favoriteMovie.postValue(null)
+            }
+            return
+        }
+
+        scope.launch {
+            repository.setFavoriteMovie(movie = movie!!)
+            favoriteMovie.postValue(
+                repository.getFavoriteMovie(id = movie!!.id!!)
+            )
+        }
+    }
+
+    fun getFavoriteMovie(id: Int?) {
+        id?.let {
+            scope.launch {
+                favoriteMovie.postValue(
+                    repository.getFavoriteMovie(id = it)
+                )
+            }
+        }
+
     }
 
     fun getMovieGenres(genres: List<Genre>?): String {

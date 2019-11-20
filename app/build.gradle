@@ -1,8 +1,7 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 29
@@ -66,6 +65,10 @@ dependencies {
     // KTX
     implementation "androidx.core:core-ktx:$ktx_version"
     implementation "androidx.fragment:fragment-ktx:$ktx_version"
+    // Room
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
     // Exoplayer
     implementation "com.google.android.exoplayer:exoplayer:$exoplayer_version"
     implementation "com.google.android.exoplayer:exoplayer-core:$exoplayer_version"
@@ -73,7 +76,6 @@ dependencies {
     implementation "com.google.android.exoplayer:exoplayer-ui:$exoplayer_version"
     implementation "com.google.android.exoplayer:exoplayer-smoothstreaming:$exoplayer_version"
     implementation "com.google.android.exoplayer:exoplayer-hls:$exoplayer_version"
-
     implementation 'com.github.evgenyneu:js-evaluator-for-android:5.0.0'
     implementation 'com.github.HaarigerHarald:android-youtubeExtractor:master-SNAPSHOT'
 
@@ -97,6 +99,4 @@ dependencies {
     androidTestImplementation('androidx.test.espresso:espresso-core:3.2.0') {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
-    implementation 'androidx.room:room-runtime:2.2.1'
-    annotationProcessor 'androidx.room:room-compiler:2.2.1'
 }

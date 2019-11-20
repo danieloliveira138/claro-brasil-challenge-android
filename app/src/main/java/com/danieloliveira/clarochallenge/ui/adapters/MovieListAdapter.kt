@@ -1,14 +1,13 @@
 package com.danieloliveira.clarochallenge.ui.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.danieloliveira.clarochallenge.R
-import com.danieloliveira.clarochallenge.enums.logIt
 import com.danieloliveira.clarochallenge.models.Movie
 import com.danieloliveira.clarochallenge.models.MovieList
 import com.danieloliveira.clarochallenge.ui.views.MovieHolder
+import com.danieloliveira.clarochallenge.utils.logIt
 
 class MovieListAdapter(private val clickMovie: (Int) -> Unit): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
