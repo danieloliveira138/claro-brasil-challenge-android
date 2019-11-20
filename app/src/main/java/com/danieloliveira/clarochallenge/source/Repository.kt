@@ -6,12 +6,12 @@ import com.danieloliveira.clarochallenge.models.MovieList
 
 interface Repository {
 
-    suspend fun requestMovies(page: Int): MovieList
+    suspend fun requestMovies(page: Int): MovieList?
 
-    suspend fun requestMovie(id: Int): MovieDetail
+    suspend fun requestMovie(id: Int): MovieDetail?
 
     suspend fun searchMovie(query: String,
-                            page: Int): MovieList
+                            page: Int): MovieList?
 
     fun saveLanguage(languages: Languages)
 

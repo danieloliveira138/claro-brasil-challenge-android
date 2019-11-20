@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
@@ -34,7 +33,9 @@ class DetailActivity : AppCompatActivity() {
 
     private fun setupObservers() {
         model.detailMovie.observe(this, Observer {
-
+            it?.let {
+                insertMovie(it)
+            }
         })
     }
 
@@ -45,6 +46,7 @@ class DetailActivity : AppCompatActivity() {
         val intent = intent
         if (intent.hasExtra(StringContants.MOVIE_ID.const)){
             model.fetchData(intent.getIntExtra(StringContants.MOVIE_ID.const, -1))
+            progressBar.visibility = View.VISIBLE
         }
     }
 
@@ -60,30 +62,20 @@ class DetailActivity : AppCompatActivity() {
         super.onBackPressed()
     }
 
-    fun progressBar(enable: Boolean?): Boolean {
-        if(enable != null){
-            when(enable) {
-                true -> progressBar.visibility = View.VISIBLE
-                false -> progressBar.visibility = View.GONE
-            }
-        }
-        return progressBar.visibility == View.VISIBLE
-    }
-
-    override fun insertMovie(movieDetail: MovieDetail) {
+    private fun insertMovie(movieDetail: MovieDetail) {
         movieTitle.text = movieDetail.title
 
-        movieGenre.text = presenter.getMovieGenres(movieDetail.genres)
+        movieGenre.text = model.getMovieGenres(movieDetail.genres)
 
-        movieRelease.text = presenter.getReleaseDate(movieDetail.release_date)
+        movieRelease.text = model.getReleaseDate(movieDetail.release_date)
 
         movieRealTitle.text = movieDetail.original_title
 
-        overview.text = presenter.getOverview(movieDetail.overview)
+        overview.text = model.getOverview(movieDetail.overview)
 
-        classification.text = presenter.getClassification(movieDetail.adult)
+        classification.text = model.getClassification(movieDetail.adult)
 
-        votes.text = presenter.getVotes(movieDetail.vote_count)
+        votes.text = model.getVotes(movieDetail.vote_count)
 
         var options = RequestOptions()
         options = options.transform(CenterCrop(), RoundedCorners(16))
@@ -113,10 +105,9 @@ class DetailActivity : AppCompatActivity() {
         movieDetail.adult?.let {
             adultContent.visibility = if (it) View.VISIBLE else View.GONE
         }
-    }
 
-    fun errorMessage(error: ErrorResponse) {
-        Toast.makeText(this, error.errorMessage, Toast.LENGTH_SHORT).show()
+        progressBar.visibility = View.GONE
+
     }
 
 }

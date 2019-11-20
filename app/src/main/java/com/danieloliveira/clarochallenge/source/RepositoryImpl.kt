@@ -10,7 +10,7 @@ import com.danieloliveira.clarochallenge.source.remote.MovieService
 class RepositoryImpl(private val service: MovieService,
                      private val sharedPrefs: SharedPrefs): Repository {
 
-    override suspend fun requestMovies(page: Int): MovieList =
+    override suspend fun requestMovies(page: Int): MovieList? =
             service.getMovies(
                 typeSearch = getTypeSearch(),
                 api_key = BuildConfig.TOKEN_ID,
@@ -18,13 +18,13 @@ class RepositoryImpl(private val service: MovieService,
                 adultContent = getAdultContentOption(),
                 page = page)
 
-    override suspend fun requestMovie(id: Int): MovieDetail =
+    override suspend fun requestMovie(id: Int): MovieDetail? =
             service.getMovie(
                 id = id,
                 api_key = BuildConfig.TOKEN_ID,
                 language = getLanguage())
 
-    override suspend fun searchMovie(query: String, page: Int): MovieList =
+    override suspend fun searchMovie(query: String, page: Int): MovieList? =
             service.searchMovie(
                 api_key = BuildConfig.TOKEN_ID,
                 language = getLanguage(),
